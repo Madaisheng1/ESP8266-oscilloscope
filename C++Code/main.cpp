@@ -8,14 +8,15 @@
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-//Ö÷º¯Êı´úÂë
+//ä¸»å‡½æ•°ä»£ç 
 
-int buf = 0;
-char respond[5] = "1";
-char respond2[2] = { 0 };
-wchar_t num[10] = {};
-int ti;
+int buf = 0;              //æ¥æ”¶åˆ°çš„ç”µå‹å¤§å°
+char respond[5] = "1";    //å›å¤ESP8266çš„å€¼
+char respond2[2] = { 0 }; //å›å¤ESP8266çš„å€¼
+wchar_t num[10] = {};     
+int ti;                   //æ—¶é—´å¸¸æ•°
 
+//ç¤ºæ³¢å™¨
 void show()
 {
 	axis->ResetBk();
@@ -41,18 +42,20 @@ void show()
 	buf = 0;
 }
 
+//ä¿¡å·å‘ç”Ÿå™¨
 void generate()
 {
 	Sleep(50);
 }
 
+//ä¸»ç¨‹åºä»£ç 
 void MWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	
 	Sleep(300);
-	main_win->Ptext(50, 460, L"ÖÜ   ÆÚ:");
-	main_win->Ptext(50, 530, L"×î´óÖµ:");
-	main_win->Ptext(50, 590, L"Õ¼¿Õ±È:");
+	main_win->Ptext(50, 460, L"å‘¨   æœŸ:");
+	main_win->Ptext(50, 530, L"æœ€å¤§å€¼:");
+	main_win->Ptext(50, 590, L"å ç©ºæ¯”:");
 	Start_Socket();
 	tcp.init(2526, "192.168.4.1");
 	if (tcp.Run() == 0)
@@ -83,18 +86,18 @@ void MWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 
-
+//åˆå§‹åŒ–å‡½æ•°
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	//////////////////////////////////////////////////
     //////////////////////////////////////////////////
-    //////////////ÏÂÃæÊÇ³õÊ¼»¯´úÂë
+    //////////////ä¸‹é¢æ˜¯åˆå§‹åŒ–ä»£ç 
 	
 	MWin win(hInstance, L"class1", 1);
 	win.Seticon(L"pic\\face.ico");
 	HWND mhwnd=win.Create(L"Elec" , 1200, 800, WS_MINIMIZE |WS_VISIBLE| WS_CAPTION| WS_OVERLAPPED| WS_SYSMENU| WS_POPUP);
 	main_win = &win;
-	//Ö÷´°¿Ú½çÃæ³õÊ¼»¯
+	//ä¸»çª—å£ç•Œé¢åˆå§‹åŒ–
 	win.Pfillrect(0, 0, 1200, 800, COLOR_MAIN);
 	win.Prect(350, 100, 1150, 700, 10, 0, COLOR_FRAME);//800*600
 	win.Prect(10, 10, 340, 790, 10, 0, COLOR_FRAME);
@@ -104,37 +107,37 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	win.Pline(10, 395, 335, 395, 10, 0, COLOR_FRAME);
 	win.Prect(10, 10, 60, 60, 10, 0, COLOR_FRAME);
 	win.Prect(10, 395, 60, 445, 10, 0, COLOR_FRAME);
-	//Ö÷´°¿Ú°´Å¥³õÊ¼»¯
-	Con_Button bu_rc(hInstance, mhwnd, ID_BU_RECV, L"½ÓÊÕ²¨ĞÎ");
-	bu_rc.Setproc(bu_recv);//½«¿Ø¼şÏìÓ¦º¯ÊıÓë¿Ø¼ş°ó¶¨
-	bu_rc.Create(65, 15, 100, 45);//X,Y,¿í,³¤
+	//ä¸»çª—å£æŒ‰é’®åˆå§‹åŒ–
+	Con_Button bu_rc(hInstance, mhwnd, ID_BU_RECV, L"æ¥æ”¶æ³¢å½¢");
+	bu_rc.Setproc(bu_recv);//å°†æ§ä»¶å“åº”å‡½æ•°ä¸æ§ä»¶ç»‘å®š
+	bu_rc.Create(65, 15, 100, 45);//X,Y,å®½,é•¿
 	bu_rc.State(CON_HIDE);
 	allbu[0] = &bu_rc;
 
-	Con_Button bu_rcf(hInstance, mhwnd, ID_BU_RECVF, L"Í£Ö¹½ÓÊÕ");
-	bu_rcf.Setproc(bu_recvf);//½«¿Ø¼şÏìÓ¦º¯ÊıÓë¿Ø¼ş°ó¶¨
-	bu_rcf.Create(65, 75, 100, 45);//X,Y,¿í,³¤
+	Con_Button bu_rcf(hInstance, mhwnd, ID_BU_RECVF, L"åœæ­¢æ¥æ”¶");
+	bu_rcf.Setproc(bu_recvf);//å°†æ§ä»¶å“åº”å‡½æ•°ä¸æ§ä»¶ç»‘å®š
+	bu_rcf.Create(65, 75, 100, 45);//X,Y,å®½,é•¿
 	bu_rcf.State(CON_HIDE);
 	allbu[1] = &bu_rcf;
 
-	Con_Button bu_con(hInstance, mhwnd, ID_BU_RECVF, L"Á¬½ÓÉè±¸");
-	bu_con.Setproc(bu_connect);//½«¿Ø¼şÏìÓ¦º¯ÊıÓë¿Ø¼ş°ó¶¨
-	bu_con.Create(65, 125, 100, 45);//X,Y,¿í,³¤
+	Con_Button bu_con(hInstance, mhwnd, ID_BU_RECVF, L"è¿æ¥è®¾å¤‡");
+	bu_con.Setproc(bu_connect);//å°†æ§ä»¶å“åº”å‡½æ•°ä¸æ§ä»¶ç»‘å®š
+	bu_con.Create(65, 125, 100, 45);//X,Y,å®½,é•¿
 	allbu[5] = &bu_con;
 
-	Con_Button bu_sd1(hInstance, mhwnd, ID_BU_SEND1, L"ÕıÏÒ²¨");
-	bu_sd1.Setproc(bu_send1);//½«¿Ø¼şÏìÓ¦º¯ÊıÓë¿Ø¼ş°ó¶¨
-	bu_sd1.Create(65, 380, 100, 45);//X,Y,¿í,³¤
+	Con_Button bu_sd1(hInstance, mhwnd, ID_BU_SEND1, L"æ­£å¼¦æ³¢");
+	bu_sd1.Setproc(bu_send1);//å°†æ§ä»¶å“åº”å‡½æ•°ä¸æ§ä»¶ç»‘å®š
+	bu_sd1.Create(65, 380, 100, 45);//X,Y,å®½,é•¿
 	allbu[2] = &bu_sd1;
 
-	Con_Button bu_sd2(hInstance, mhwnd, ID_BU_SEND1, L"¾â³İ²¨");
-	bu_sd2.Setproc(bu_send2);//½«¿Ø¼şÏìÓ¦º¯ÊıÓë¿Ø¼ş°ó¶¨
-	bu_sd2.Create(180, 380, 100, 45);//X,Y,¿í,³¤
+	Con_Button bu_sd2(hInstance, mhwnd, ID_BU_SEND1, L"é”¯é½¿æ³¢");
+	bu_sd2.Setproc(bu_send2);//å°†æ§ä»¶å“åº”å‡½æ•°ä¸æ§ä»¶ç»‘å®š
+	bu_sd2.Create(180, 380, 100, 45);//X,Y,å®½,é•¿
 	allbu[3] = &bu_sd2;
 	
-	Con_Button bu_sdf(hInstance, mhwnd, ID_BU_SENDF, L"½áÊø·¢ËÍ");
-	bu_sdf.Setproc(bu_sendf);//½«¿Ø¼şÏìÓ¦º¯ÊıÓë¿Ø¼ş°ó¶¨
-	bu_sdf.Create(100, 700, 100, 45);//X,Y,¿í,³¤
+	Con_Button bu_sdf(hInstance, mhwnd, ID_BU_SENDF, L"ç»“æŸå‘é€");
+	bu_sdf.Setproc(bu_sendf);//å°†æ§ä»¶å“åº”å‡½æ•°ä¸æ§ä»¶ç»‘å®š
+	bu_sdf.Create(100, 700, 100, 45);//X,Y,å®½,é•¿
 	bu_sdf.State(CON_HIDE);
 	allbu[4] = &bu_sdf;
 
@@ -144,7 +147,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	im.Initbmp(win.GetbkDC(), 1, hInstance);
 	im.Loadbmp(0, L"pic\\enter.bmp", 30, 30);
 	win.Setibmp(&im);
-	//Ö÷´°¿Ú±à¼­Æ÷¿Ø¼ş
+	//ä¸»çª—å£ç¼–è¾‘å™¨æ§ä»¶
 	Con_Edit e_t(hInstance, mhwnd, ID_ED_T, 20);
 	Con_Edit e_max(hInstance, mhwnd, ID_ED_T, 20);
 	Con_Edit e_rate(hInstance, mhwnd, ID_ED_T, 20);
@@ -158,7 +161,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	alled[1] = &e_max;
 	alled[2] = &e_rate;
 	
-	//×ø±êÖá´°¿Ú³õÊ¼»¯
+	//åæ ‡è½´çª—å£åˆå§‹åŒ–
 	wchar_t cnm[10] = L"123";
 	MWin_axis ax(hInstance, cnm);
 	ax.Create(L"", 340, 90, 800, 600, mhwnd, WS_CHILD | WS_BORDER|WS_VISIBLE);
@@ -173,12 +176,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	thread MainLine(MainRun, hInstance, hPrevInstance, lpCmdLine, nShowCmd);
 	LineState = LINE_RUN;
 	MainLine.detach();
-	//ÏûÏ¢Ñ­»·
+	//æ¶ˆæ¯å¾ªç¯
 	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0))//Èç¹ûÏûÏ¢²»ÊÇWM_QUIT,·µ»Ø·ÇÁãÖµ£»Èç¹ûÏûÏ¢ÊÇWM_QUIT£¬·µ»ØÁã
+	while (GetMessage(&msg, NULL, 0, 0))//å¦‚æœæ¶ˆæ¯ä¸æ˜¯WM_QUIT,è¿”å›éé›¶å€¼ï¼›å¦‚æœæ¶ˆæ¯æ˜¯WM_QUITï¼Œè¿”å›é›¶
 	{
-		TranslateMessage(&msg);//·­ÒëÏûÏ¢£¬Èç°ÑWM_KEYDOWNºÍWM_KEYUP·­Òë³ÉÒ»¸öWM_CHARÏûÏ¢
-		DispatchMessage(&msg);//ÅÉ·¢ÏûÏ¢
+		TranslateMessage(&msg);//ç¿»è¯‘æ¶ˆæ¯ï¼Œå¦‚æŠŠWM_KEYDOWNå’ŒWM_KEYUPç¿»è¯‘æˆä¸€ä¸ªWM_CHARæ¶ˆæ¯
+		DispatchMessage(&msg);//æ´¾å‘æ¶ˆæ¯
 	}
 	HANDLE hThread = MainLine.native_handle();
 	GetExitCodeThread(hThread, &dwExitCode);
@@ -186,13 +189,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		if (!TerminateThread(hThread, 0))
 		{
-			MessageBox(NULL, L"ERROR", L"Ïß³Ì½áÊøÊ§°Ü", MB_OK);
+			MessageBox(NULL, L"ERROR", L"çº¿ç¨‹ç»“æŸå¤±è´¥", MB_OK);
 		}
 	}
 	
 }
 
-//µ±Ö÷´°¿Ú¹Ø±ÕÊ±Ö´ĞĞµÄº¯Êı
+//å½“ä¸»çª—å£å…³é—­æ—¶æ‰§è¡Œçš„å‡½æ•°
 void WinClose()
 {
 	mission = -1;
